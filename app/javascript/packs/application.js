@@ -15,3 +15,7 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import "../styles/index.scss";
+import "materialize-css/dist/js/materialize.min.js";
+M.AutoInit();
