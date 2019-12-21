@@ -16,6 +16,24 @@
     <%= form.text_field :title %>
   </div>
 
+  <%= form.fields_for :material do |material| %>
+    <div class="field">
+      <%= material.label :material %>
+      <%= material.text_field :material %>
+    </div>
+    <div class="field">
+      <%= material.label :serving %>
+      <%= material.text_field :serving %>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :how_tos do |howto| %>
+    <div class="field">
+      <%= howto.label :howto %>
+      <%= howto.text_field :howto %>
+    </div>
+  <% end%>
+
   <div class="actions">
     <%= form.submit %>
   </div>
