@@ -1,8 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>タイトル:</strong>
   <%= @recipe.title %>
+</p>
+
+<p>
+  <% @recipe.materials.each do |material| %>
+    <strong>材料:</strong>
+    <%= material.material %>
+    <strong>分量:</strong>
+    <%= material.serving %>
+  <% end %>
+</p>
+
+<p>
+  <% @recipe.how_tos.each do |howto| %>
+    <strong>1:</strong>
+    <%= howto.howto %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
