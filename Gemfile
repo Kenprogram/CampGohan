@@ -29,6 +29,8 @@ gem 'jquery-rails'
 # materialize
 gem 'materialize-sass'
 gem 'material_icons'
+# 日本語
+gem 'rails-i18n'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

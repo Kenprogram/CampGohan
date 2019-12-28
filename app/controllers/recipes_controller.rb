@@ -10,7 +10,6 @@ class RecipesController < ApplicationController
   # GET /recipes/1
   # GET /recipes/1.json
   def show
-   
   end
 
   # GET /recipes/new
@@ -59,7 +58,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
+      format.html { redirect_to @recipes, notice: 'Recipe was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -74,7 +73,8 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(
         :title,
-        :category_ids,
+        :category_id,
+        :thumbnail,
         materials_attributes: [:material, :serving, :destroy],
         how_tos_attributes: [:howto, :destroy]
       )
@@ -83,7 +83,8 @@ class RecipesController < ApplicationController
     def recipe_update_params
       params.require(:recipe).permit(
         :title,
-        :category_ids,
+        :category_id,
+        :thumbnail,
         materials_attributes: [:id, :material, :serving, :_destroy],
         how_tos_attributes: [:id, :howto, :_destroy]
       )

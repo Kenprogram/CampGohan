@@ -1,16 +1,22 @@
 <div class="row">
-  <%= form_with(model: recipe, local: true) do |form| %>
-    <% if recipe.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+  <div class="col s8 offset-s2"> 
+    <%= form_with(model: recipe, local: true) do |form| %>
+      <% if recipe.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-        <ul>
-          <% recipe.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+          <ul>
+            <% recipe.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  </div>
+
+    <div class="field col s4 offset-s2">
+      <%= form.file_field :thumnail %>
+    </div>
 
     <div class="field  col s8 offset-s2">
       <%= form.label :title, "タイトル" %>
