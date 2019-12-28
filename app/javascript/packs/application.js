@@ -7,7 +7,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require（"jquery "）
+require("jquery")
+import 'materialize-css/dist/js/materialize'
 
 //= require materialize
 
@@ -18,8 +19,5 @@ require（"jquery "）
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import '../stylesheets/application'
-import 'materialize-css/dist/js/materialize'
-import "../styles/index.scss";
-import "materialize-css/dist/js/materialize.min.js";
-M.AutoInit();
+
+

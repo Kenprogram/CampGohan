@@ -15,8 +15,8 @@
 </p>
 
 <p>
-  <% @recipe.how_tos.each do |howto| %>
-    <strong>1:</strong>
+  <% @recipe.how_tos.each.with_index(1) do |howto, i| %>
+    <strong><%= "#{ i }"%>：</strong>
     <%= howto.howto %>
   <% end %>
 </p>

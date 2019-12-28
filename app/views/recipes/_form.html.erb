@@ -1,40 +1,59 @@
-<%= form_with(model: recipe, local: true) do |form| %>
-  <% if recipe.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+<div class="row">
+  <%= form_with(model: recipe, local: true) do |form| %>
+    <% if recipe.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
 
-      <ul>
-        <% recipe.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% recipe.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field  col s8 offset-s2">
+      <%= form.label :title, "タイトル" %>
+      <%= form.text_field :title %>
+    </div>
+
+    <div class="input-field col s2 offset-s2 browser-default">
+      <label></label>
+      <select class="browser-default">
+        <option value="" disabled selected>カテゴリ</option>
+        <option value="1">肉料理</option>
+        <option value="2">魚料理</option>
+        <option value="3">パン</option>
+        <option value="4">ご飯</option>
+        <option value="5">野菜</option>
+        <option value="6">乳製品</option>
+        <option value="7">卵料理</option>
+        <option value="8">その他</option>
+      </select>
+    </div>
+
+    <%= form.fields_for :materials do |material| %>
+      <div class="field col s8 offset-s2">
+        <%= material.label :material, "材料" %>
+        <%= material.text_field :material %>
+      </div>
+      <div class="field col s8 offset-s2">
+        <%= material.label :serving, "分量" %>
+        <%= material.text_field :serving %>
+      </div>
+    <% end %>
+
+    <!-- eachで繰り返し処理とレシピ番号の割り振り-->
+
+    <%= form.fields_for :how_tos do |howto| %>
+      <div class="field col s8 offset-s2">
+        <%= howto.label :howto, "作り方" %>
+        <%= howto.text_field :howto %>
+      </div>
+    <% end%>
+
+    <div class="actions col s8 offset-s2">
+      <%= form.submit '投稿する' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <%= form.fields_for :materials do |material| %>
-    <div class="field">
-      <%= material.label :material %>
-      <%= material.text_field :material %>
-    </div>
-    <div class="field">
-      <%= material.label :serving %>
-      <%= material.text_field :serving %>
-    </div>
-  <% end %>
-
-  <%= form.fields_for :how_tos do |howto| %>
-    <div class="field">
-      <%= howto.label :howto %>
-      <%= howto.text_field :howto %>
-    </div>
-  <% end%>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

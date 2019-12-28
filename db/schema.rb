@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_21_102134) do
+ActiveRecord::Schema.define(version: 2019_12_23_223135) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "how_tos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "howto"
@@ -27,6 +33,15 @@ ActiveRecord::Schema.define(version: 2019_12_21_102134) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipe_id"], name: "index_materials_on_recipe_id"
+  end
+
+  create_table "recipe_category_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_recipe_category_relations_on_category_id"
+    t.index ["recipe_id"], name: "index_recipe_category_relations_on_recipe_id"
   end
 
   create_table "recipes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,4 +64,6 @@ ActiveRecord::Schema.define(version: 2019_12_21_102134) do
 
   add_foreign_key "how_tos", "recipes"
   add_foreign_key "materials", "recipes"
+  add_foreign_key "recipe_category_relations", "categories"
+  add_foreign_key "recipe_category_relations", "recipes"
 end

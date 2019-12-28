@@ -44,7 +44,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1.json
   def update
     respond_to do |format|
-      if @recipe.update(recipe_params)
+      if @recipe.update!(recipe_update_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -74,9 +74,18 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(
         :title,
-        materials_attributes: [:material, :serving],
-        how_tos_attributes: [:howto]
+        :category_ids,
+        materials_attributes: [:material, :serving, :destroy],
+        how_tos_attributes: [:howto, :destroy]
       )
     end
-
+    
+    def recipe_update_params
+      params.require(:recipe).permit(
+        :title,
+        :category_ids,
+        materials_attributes: [:id, :material, :serving, :_destroy],
+        how_tos_attributes: [:id, :howto, :_destroy]
+      )
+    end
 end
