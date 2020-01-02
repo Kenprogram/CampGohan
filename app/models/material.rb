@@ -1,6 +1,6 @@
 class Material < ApplicationRecord
   belongs_to :recipe
 
-  validates :material, presence: true
-  validates :serving, presence: true
+  validates :material, presence: true, length: { in: 1..10 }
+  validates :serving, presence: true, length: { in: 1..10 }
 end

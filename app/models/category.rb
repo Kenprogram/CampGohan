@@ -1,4 +1,5 @@
 class Category < ApplicationRecord
-  has_many :recipe_category_relations
-  has_many :recipes, through: :recipe_category_relations
+  belongs_to :recipe
+
+  validates :name, presence: true, length: { in: 1..5 }
 end

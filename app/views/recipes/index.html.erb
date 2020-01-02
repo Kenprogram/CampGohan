@@ -2,6 +2,24 @@
 
 <h1>Recipes</h1>
 
+<div class="row">
+  <% @recipes.each do |recipe| %>
+    <div class="col s3">
+      <div class="card">
+        <div class="card-image">
+          <img src="">
+        </div>
+        <div class="card-content">
+          <p><%= recipe.title %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to 'Show', recipe %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 <table>
   <thead>
     <tr>

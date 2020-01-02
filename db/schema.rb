@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_040219) do
+ActiveRecord::Schema.define(version: 2020_01_02_074536) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2019_12_28_040219) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "recipe_id", null: false
+    t.index ["recipe_id"], name: "index_categories_on_recipe_id"
   end
 
   create_table "how_tos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -56,19 +58,12 @@ ActiveRecord::Schema.define(version: 2019_12_28_040219) do
     t.index ["recipe_id"], name: "index_materials_on_recipe_id"
   end
 
-  create_table "recipe_category_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_recipe_category_relations_on_category_id"
-    t.index ["recipe_id"], name: "index_recipe_category_relations_on_recipe_id"
-  end
-
   create_table "recipes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -79,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_12_28_040219) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -86,6 +82,4 @@ ActiveRecord::Schema.define(version: 2019_12_28_040219) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "how_tos", "recipes"
   add_foreign_key "materials", "recipes"
-  add_foreign_key "recipe_category_relations", "categories"
-  add_foreign_key "recipe_category_relations", "recipes"
 end

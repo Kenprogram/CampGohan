@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      recipe: レシピ
+    attributes:
+      recipe:
+        title: タイトル
+      material:
+        material: 材料
+        serving: 分量
+      how_to:
+        howto: 作り方
+      category: 
+        Name: カテゴリ
+      

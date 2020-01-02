@@ -17,6 +17,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.materials.build
     @recipe.how_tos.build
+    @recipe.categories.build
   end
 
   # GET /recipes/1/edit
@@ -26,7 +27,7 @@ class RecipesController < ApplicationController
   # POST /recipes
   # POST /recipes.json
   def create
-    @recipe = Recipe.create(recipe_params)
+    @recipe = current_user.recipes.build(recipe_params)
 
     respond_to do |format|
       if @recipe.save
@@ -73,8 +74,8 @@ class RecipesController < ApplicationController
     def recipe_params
       params.require(:recipe).permit(
         :title,
-        :category_id,
         :thumbnail,
+        categories_attributes: [:name, :_destroy],
         materials_attributes: [:material, :serving, :destroy],
         how_tos_attributes: [:howto, :destroy]
       )
@@ -83,8 +84,7 @@ class RecipesController < ApplicationController
     def recipe_update_params
       params.require(:recipe).permit(
         :title,
-        :category_id,
-        :thumbnail,
+        categories_attributes: [:id, :name, :_destroy],
         materials_attributes: [:id, :material, :serving, :_destroy],
         how_tos_attributes: [:id, :howto, :_destroy]
       )

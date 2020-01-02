@@ -12,6 +12,13 @@
 </p>
 
 <p>
+  <% @recipe.categories.each do |category| %>
+    <strong>カテゴリ:</strong>
+    <%= category.name %>
+  <% end %>
+</p>
+
+<p>
   <% @recipe.materials.each do |material| %>
     <strong>材料:</strong>
     <%= material.material %>
@@ -26,6 +33,7 @@
     <%= howto.howto %>
   <% end %>
 </p>
+
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

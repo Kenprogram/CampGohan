@@ -1,0 +1,17 @@
+<nav>
+  <div class="nav-wrapper grey darken-1">
+    <a href="" class="left brand-logo">CampGohan</a>
+      <ul id="dropdown1" class="dropdown-trigger right">
+        <% if user_signed_in? %>
+           <li><%= link_to "レシピの新規登録", new_recipe_path,  class: 'post' %></li>
+           <li><%= link_to "マイページ", new_recipe_path,  class: 'post' %></li>
+        <% else %>
+          <li><%= link_to "ログイン", new_user_session_path, class: 'post' %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, class: 'post' %></li>
+        <% end %>
+      </ul>
+    <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+  </div>
+</nav>
+
+
